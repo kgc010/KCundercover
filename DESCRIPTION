@@ -16,3 +16,7 @@ Imports:
     sysfonts
 URL: https://github.com/kgc010/KCundercover
 BugReports: https://github.com/kgc010/KCundercover/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
