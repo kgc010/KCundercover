@@ -9,6 +9,8 @@ Config/roxygen2/version: 8.1.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
-    readr
+    readr,
+    showtext,
+    sysfonts
 URL: https://github.com/kgc010/KCundercover
 BugReports: https://github.com/kgc010/KCundercover/issues
