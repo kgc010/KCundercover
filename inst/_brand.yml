@@ -1,0 +1,32 @@
+meta:
+  name: "Katelyn Callahan"
+
+color:
+  palette:
+    sage: "#9CAF88" 
+    Rose: "#E79897",
+    Honey: "#FCC88A", 
+    LightBlue: "#B7CBDB", 
+    Maroon: "#660033", 
+    PineGreen: "#1F4D3A"
+  background: "#FFFFFF"
+  foreground: "#000000"
+  
+
+typography:
+  fonts:    
+    - family: "Playfair Display"
+      source: google
+      
+  base: "Playfair Display"
+
+  
+logo:
+  images:
+    logomain: "stat306brandlogo.png"
+  small: "stat306brandlogo.png"
+  medium: "stat306brandlogo.png"
+  large:  "stat306brandlogo.png"
+  
+    
+
