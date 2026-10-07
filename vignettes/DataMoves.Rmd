@@ -8,6 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+#Do I Need This??? 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -16,4 +17,68 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(KCundercover)
+library(tidyverse)
+```
+
+# Data Moves:
+
+## Filter:
+
+The filter data move in this example filters the near death experience data set called "neardeath1" to responses that were submitted in English and by females. The top six rows of this column were then outputted by the head() function. 
+
+```{r}
+neardeath1 %>%
+  filter(language_new == "english", gender_new == "Female") %>% 
+  head()
+```
+
+## Group By/Summarize:
+
+The group by/summaries data move in this example groups the near death experience data set called "neardeath1" by the two different categories of gender responses. Then the responses are summarized to output the mean greyson score for both genders. 
+
+```{r}
+neardeath1 %>%
+  group_by(gender_new) %>%
+  summarize(mean_greyson_score = mean(greyson_score, na.rm = TRUE))
+```
+
+## Join:
+
+The join data move in this example groups the near death experience data set called "neardeath1" by the two different categories of gender responses. Then the responses are summarized to output the mean narrative length for both genders into a new variable called "average_narrative_length" which is saved into the new data set created called "totals". 
+
+```{r}
+totals <- neardeath1 %>%
+  group_by(gender_new) %>%
+  summarise(average_narrative_length = mean(narrative_length))
+
+neardeath1 <- neardeath1 %>%
+  left_join(totals, by = c("gender_new"))
+
+neardeath1 <- neardeath1 %>%
+  mutate(narrativelength_difference_from_average = narrative_length - average_narrative_length)
+```
+
+## Arrange:
+
+The first section of code shows uses the death near data set, called "neardeath1", and the head function to displays the first 6 rows in default order of the data set for reference. Then the arrange data move in the second section of code takes the near death experience data set and sorts the data in ascending order using the arrange function by the variable entry_id. Lastly, the head function returns the first 6 rows of the data set so the arranged order is visible. 
+
+```{r}
+neardeath1 %>% 
+  head()
+
+neardeath1 %>%
+  arrange(entry_id) %>%
+  head()
+```
+
+## Mutate:
+
+The mutate data move in this section of code takes the near death experience data set, called "neardeath1", and uses the mutation function to create a new column, called "greyson_score_geniune" within the near death experience data set. The new variable categories the variable greyson_score into two categories, "Ungeniune NDE" and "Geniune NDE".
+
+```{r}
+neardeath1 %>%
+  mutate(greyson_score_geniune = case_when(
+    greyson_score > 7 ~ "Ungeniune NDE",
+    greyson_score <= 7 ~ "Geniune NDE"
+  ))
 ```
