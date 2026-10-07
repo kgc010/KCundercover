@@ -1,9 +1,9 @@
-#' Title
+#' Theme function that can be applied to customize ggplots.
 #'
-#' @param gridline_x
-#' @param gridline_y
+#' @param gridline_x specifies if you would like x axis gridlines on your ggplot.
+#' @param gridline_y specifies if you would like y axis gridlines on your ggplot.
 #'
-#' @returns
+#' @returns The ggplot created using the ggplot function customized to the KCundercover theme.
 #' @export
 #'
 #' @examples
