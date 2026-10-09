@@ -1,9 +1,9 @@
 Package: KCundercover
-Title: What the Package Does (One Line, Title Case)
+Title: Codebreaking and Secret Operations
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Katelyn", "Callahan", , "kgc010@bucknell.edu", role = c("aut", "cre"))
+Description: The KCundercover package contains two functions: a theme function called 'theme_KCundercover' and a helper function called 'betterthanfactoring'. A brand that corresponds with the theme function and a logo are also contained with in the KCundercover package. The overalll goal of the package is to assist users while creating visual graphs and factoring data sets for easy use in anaylsis.  
 License: MIT + file LICENSE
 Config/roxygen2/version: 8.1.0
 Encoding: UTF-8
@@ -20,3 +20,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Depends: 
+    tidyverse

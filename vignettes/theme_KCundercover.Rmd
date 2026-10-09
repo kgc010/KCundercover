@@ -14,8 +14,79 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Data Set Used in KCundercover Package 
+
+  The data set used to make create the example theme plots contained with in this vignette is 'neardeath1'. This data set contains a collection of 18 variable that can be used to assess and compare a near death experience, such as gender, country, and greyson_score. Greyson_score is a score used to assess whether or not a near death experience in genuine or not, any greyson score of 7 or higher is considered a genuine near death experience. This data set contains 589 near death experience entries. All entries come from a different near death experience. 
+  
+  
+# Set Up Code Chunk Needed to Produce Example Graphs
+
 ```{r setup}
 library(KCundercover)
+library(tidyverse)
+neardeath <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/refs/heads/main/data/2026/2026-07-21/nde_experiences.csv")
+neardeath1 <- betterthanfactoring(neardeath, c("gender", "classification", "country", "category", "language", "ai_obe", "ai_unity", "ai_hellish", "ai_clinical", "ai_esp", "ai_past_lives", "ai_world_future", "ai_aliens"))
 ```
 
 
+# Theme 
+
+  The KCundercover package includes a theme for that allows users to create polished visualizations. The theme function allows users to make ggplots with that have the KCundercover theme applied to them is called 'theme_Kcundercover'. The theme_KCundercover function has two adaptable aspects: x-axis grid line and y-axis grid lines. Users can decided whether or not they want either set of grid lines by setting either of these parameters as true or false with the default setting being true. The inter working of the theme_KCundercover function can be described and seen in the theme_KCundercover help document.
+
+  The colors used within the theme_KCundercover function can be seen in the KCundercover brand and are held in color palette called my_colors. To use the one of the specific brand colors in your ggplot the code scale_color_manual(values = my_colors[c(1,3)]) can be added onto ggplot code. The number concatenated within the my_color brackets correspond with a specific color in the palette. There are 6 colors contained within the my_colors palette. The KCundercover theme allows users to make polished plots that are visualizing appealing quickly with less code. Some example plots using the KCundercover theme can be seen below.
+
+## Examples of Theme 
+
+```{r, fig.width= 9}
+neardeath1 %>% 
+  ggplot(., aes(x = narrative_length, y = greyson_score, color = ai_aliens)) +
+  geom_point() + 
+  labs(title = "Distribution of Greyson Score by Narrative Length
+                              for Alien Experiences",
+    subtitle = "Difference in Greyson Score distribution by narrative length for people having near death 
+alien experiences. There is a high frequency of entries with a lower number of narratives and 
+majority of entries in this dataset do not have alien experiences.",
+    caption = "Data source: {tidytuesday} R package",
+    x = "Narrative Length",
+    y = "Greyson Score", 
+color = "Alien Near Death
+      Experience") + 
+  theme_KCundercover(gridline_x = FALSE) +
+  scale_color_manual(values = my_colors[c(1,3)])
+```
+
+```{r, fig.width= 9}
+neardeath1 %>% 
+  ggplot(., aes(x = gender, y = greyson_score, fill = gender)) +
+  geom_boxplot() + 
+  labs(title = "Difference in Greyson Score between Males and Females",
+    subtitle = "Difference in Greyson Score distribution for males and females. Males and females in this data
+set appear to have similar distributions of greyson score. A female appears to have the highest greyson score
+based on these side by side boxplots.",
+    caption = "Data source: {tidytuesday} R package",
+    x = "Gender",
+    y = "Greyson Score") + 
+  theme_KCundercover(gridline_x = FALSE) +
+  scale_fill_manual(values = my_colors[c(1,4)]) + 
+  theme(legend.position = "none")
+```
+
+```{r, fig.width= 9}
+neardeath1 %>% 
+  filter(post_date > 1999-01-01) %>%
+  ggplot(., aes(x = post_date, y = greyson_score, color = ai_hellish)) +
+  geom_line() + 
+  labs(title = "Change in Greyson Score Overtime between Hellish and 
+Not Hellish Near Death Experience",
+    subtitle = "Difference in greyson score overtime between near death experiences that identified as hellish
+and not hellish. There is a less linear stable change in greyson score over time than the near death
+experience that are not hellish than the change in the greyson score of over time than the near death
+experience that are hellish.",
+    caption = "Data source: {tidytuesday} R package",
+    x = "Experience Post Date",
+    y = "Greyson Score",
+color = "Hellish Near Death
+     Experience") + 
+  theme_KCundercover(gridline_x = FALSE) +
+  scale_color_manual(values = my_colors[c(2, 6)])  
+```

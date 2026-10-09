@@ -6,7 +6,7 @@
 #' @returns The ggplot created using the ggplot function customized to the KCundercover theme.
 #' @export
 #'
-#' @examples
+#' @examples See theme_KCundercover vignette to see an explain of the theme_KCundercover function in use.
 theme_KCundercover <- function(gridline_x = TRUE, gridline_y = TRUE) {
 
   sysfonts::font_add_google("Playfair Display", "playfair display")
